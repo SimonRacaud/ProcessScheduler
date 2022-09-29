@@ -7,7 +7,9 @@
 
 SRC1 = 	task1-33287430.c	\
 		file.c				\
-		arg.c
+		arg.c				\
+		simulator.c 		\
+		list.c				\
 
 OBJ1 = $(SRC1:.c=.o)
 

@@ -79,10 +79,15 @@ process_input_t *read_input(char const *filepath, size_t *size)
         status = parse_line(line, &inputs[idx]);
         if (status == EXIT_FAILURE) {
             free(inputs);
+            free(line);
             return NULL;
         }
         idx++;
+        free(line);
+        line = NULL;
+        line_size = 0;
     }
+    free(line);
     fclose(file);
     *size = idx;
     return inputs;

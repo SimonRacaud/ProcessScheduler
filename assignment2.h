@@ -10,10 +10,11 @@
 #define H_ASS2
 
 #include <stdbool.h>
+#include <stddef.h>
+#include "pcb.h"
 
 #define DEF_INPUT_FILE "processes.txt"
-
-#include "pcb.h"
+#define UNUSED __attribute__((unused))
 
 // STRUCTURES
 
@@ -32,12 +33,43 @@ typedef struct {
     bool deadline_met;      // If the deadline have been met
 } process_result_t;
 
+typedef struct pcb_node {
+    pcb_t data;
+    struct pcb_node *next;
+} pcb_node_t;
+
+typedef enum event {
+    E_CREATE,
+    E_START,
+    E_EXIT
+} event_t;
+
+/**
+ * @brief Scheduler function pointer
+ * @param list_ptr : linked list of pcb
+ * @param prev_node : node previously selected by the scheduler
+ * @param clock : clock counter
+ */
+typedef pcb_node_t *(* scheduler_t)(pcb_node_t **list_ptr, pcb_node_t *prev_node, size_t clock);
+
 /// PROTOTYPES
 
 process_input_t *read_input(char const *filepath, size_t *size);
 
+process_result_t *simulate(
+    process_input_t *inputs, 
+    size_t size_in, 
+    scheduler_t scheduler, 
+    size_t *size_out);
+
 char const *get_intput_filepath(int argc, char **argv);
 
 int output_generator(const process_result_t *array, size_t size, int task);
+
+// List:
+pcb_node_t *node_push(pcb_node_t *list, const process_input_t *data, size_t time);
+pcb_node_t *node_remove(pcb_node_t *list, pcb_node_t *to_remove);
+pcb_node_t *node_move_back(pcb_node_t *list);
+void list_destroy(pcb_node_t *list);
 
 #endif
