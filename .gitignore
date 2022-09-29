@@ -1,0 +1,4 @@
+*.o
+task[1-5]
+processes.txt
+.vscode
