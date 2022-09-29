@@ -22,6 +22,8 @@ static pcb_node_t *node_create(const process_input_t *data, size_t time)
     node->data.remaining_time = data->service_time;
     node->data.service_time = data->service_time;
     node->data.state = READY;
+    node->data.start_time = -1;
+    *(int *)&node->data.deadline = data->deadline;
     node->next = NULL;
     return node;
 }

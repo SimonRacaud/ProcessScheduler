@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 
 /**
  * @brief STDOUT process state logger
@@ -64,7 +65,13 @@ static pcb_node_t *clean_exited_processes(
    for (pcb_node_t *it = processes; it; it = next) {
         if (it->data.state == EXIT) {
             logger(E_EXIT, it->data.process_name, clock);
-            // TODO : add result
+            // Save informations about process execution in result structure
+            size_t idx = *result_size;
+            strcpy(result[idx].process_name, it->data.process_name);
+            result[idx].wait_time = (it->data.start_time - it->data.entry_time);
+            result[idx].turnaround_time = (clock - it->data.entry_time);
+            result[idx].deadline_met = (result[idx].turnaround_time < it->data.deadline);
+            //
             (*result_size) += 1;
             next = it->next;
             if (*running_node == it) {
@@ -98,6 +105,7 @@ process_result_t *simulate(
     pcb_node_t *processes = NULL;
     pcb_node_t *running_node = NULL;
 
+    *size_out = 0;
     while (processes || clock == 0) {
         processes = clean_exited_processes(processes, &running_node, result, size_out, clock);
         processes = manage_process_entry(processes, inputs, size_in, clock);
@@ -108,6 +116,9 @@ process_result_t *simulate(
             select_node->data.state = RUNNING; // Start new process
             if (running_node)
                 running_node->data.state = READY; // Put the previous process in pause
+            if (select_node->data.start_time == -1) {
+                select_node->data.start_time = clock; // First time the process is running
+            }
             logger(E_START, select_node->data.process_name, clock);
         }
         if (select_node) {

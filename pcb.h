@@ -22,6 +22,9 @@ typedef struct {
     int service_time;    // Total time required by process
     int remaining_time;  // Remaining time until completion
 
+    int start_time;      // Time when process first entered RUNNING state
+    const int deadline;  // Deadline of the process
+
     process_state_t state; // Current state of the process
 } pcb_t;
 
