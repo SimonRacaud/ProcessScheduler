@@ -11,21 +11,23 @@
 
 #include "assignment2.h"
 
+static const int TASK_ID = 1;
+
 int main(int argc, char **argv)
 {
     char const *filepath = get_intput_filepath(argc, argv);
     size_t size = 0;
     process_input_t *inputs = read_input(filepath, &size);
+    int status = EXIT_SUCCESS;
 
     if (!inputs) {
         return EXIT_FAILURE;
     }
     // Simulator:
-    for (size_t i = 0; i < size; i++) {
-        printf("Name: %s, Arrival: %d, Service: %d, Deadline: %d\n", 
-            inputs[i].process_name, inputs[i].arrival_time, inputs[i].service_time, inputs[i].deadline);
-    }
+    process_result_t *results = NULL; // simulate(inputs, &size);
+    // Write outputs
+    status = output_generator(results, size, TASK_ID);
     // Clean before exit
     free(inputs);
-    return EXIT_SUCCESS;
+    return status;
 }

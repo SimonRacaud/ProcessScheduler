@@ -87,3 +87,36 @@ process_input_t *read_input(char const *filepath, size_t *size)
     *size = idx;
     return inputs;
 }
+
+/**
+ * @brief Write data to output file
+ * 
+ * @param array[in] : data to write
+ * @param size : size of array 
+ * @param task : task number (1 to 3)
+ * @return int EXIT_SUCCESS | EXIT_FAILURE
+ */
+int output_generator(const process_result_t *array, size_t size, int task)
+{
+    char filename[] = "results-X.txt";
+    FILE *file;
+
+    if (task > 3 || task < 1) {
+        return EXIT_FAILURE;
+    }
+    filename[8] = task + '0';
+    file = fopen(filename, "w");
+    if (!file) {
+        perror(NULL);
+        return EXIT_FAILURE;
+    }
+    for (size_t i = 0; i < size; i++) {
+        fprintf(file, "%s %d %d %d\n",
+            array[i].process_name, 
+            array[i].wait_time, 
+            array[i].turnaround_time, 
+            (int)array[i].deadline_met);
+    }
+    fclose(file);
+    return EXIT_SUCCESS;
+}
