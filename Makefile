@@ -10,6 +10,7 @@ SRC1 = 	task1-33287430.c	\
 		arg.c				\
 		simulator.c 		\
 		list.c				\
+		common.c			\
 
 OBJ1 = $(SRC1:.c=.o)
 

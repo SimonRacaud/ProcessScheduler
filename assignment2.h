@@ -54,13 +54,19 @@ typedef pcb_node_t *(* scheduler_t)(pcb_node_t **list_ptr, pcb_node_t *prev_node
 
 /// PROTOTYPES
 
-process_input_t *read_input(char const *filepath, size_t *size);
+// Common:
+
+int simulator(int argc, char **argv, scheduler_t scheduler, size_t task_id);
+
+// Internal functions:
 
 process_result_t *simulate(
     process_input_t *inputs, 
     size_t size_in, 
     scheduler_t scheduler, 
     size_t *size_out);
+
+process_input_t *read_input(char const *filepath, size_t *size);
 
 char const *get_intput_filepath(int argc, char **argv);
 

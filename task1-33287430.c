@@ -11,8 +11,6 @@
 
 #include "assignment2.h"
 
-static const int TASK_ID = 1;
-
 static pcb_node_t *fcfs_scheduler(
     pcb_node_t **list_ptr, 
     UNUSED pcb_node_t *prev_node, 
@@ -28,21 +26,7 @@ static pcb_node_t *fcfs_scheduler(
 
 int main(int argc, char **argv)
 {
-    char const *filepath = get_intput_filepath(argc, argv);
-    size_t size = 0;
-    process_input_t *inputs = read_input(filepath, &size);
-    int status = EXIT_SUCCESS;
-    size_t result_size = 0;
+    const int TASK_ID = 1;
 
-    if (!inputs) {
-        return EXIT_FAILURE;
-    }
-    // Simulator:
-    process_result_t *results = simulate(inputs, size, &fcfs_scheduler, &result_size);
-    // Write outputs
-    status = output_generator(results, size, TASK_ID);
-    // Clean before exit
-    free(inputs);
-    free(results);
-    return status;
+    return simulator(argc, argv, &fcfs_scheduler, TASK_ID);
 }
