@@ -11,6 +11,14 @@
 
 #include "assignment2.h"
 
+/**
+ * @brief First-Come-First-Served scheduler
+ * 
+ * @param list_ptr : PCB linked list
+ * @param prev_node : Previous PCB selected to run
+ * @param clock : clock counter
+ * @return pcb_node_t* : Next PCB to run
+ */
 static pcb_node_t *fcfs_scheduler(
     pcb_node_t **list_ptr, 
     UNUSED pcb_node_t *prev_node, 

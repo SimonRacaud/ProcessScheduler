@@ -5,23 +5,31 @@
 ## updatedAt: 11:26:47 AM Thu Sep 29 2022
 ##
 
-SRC1 = 	task1-33287430.c	\
-		file.c				\
+SRC = 	file.c				\
 		arg.c				\
 		simulator.c 		\
 		list.c				\
 		common.c			\
 
+SRC1 = 	$(SRC) task1-33287430.c
+SRC2 = 	$(SRC) task2-33287430.c
+
 OBJ1 = $(SRC1:.c=.o)
+OBJ2 = $(SRC2:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror -W -I./
 
 NAME1 = task1
+NAME2 = task2
+NAME3 = task3
 
 all: $(NAME1)
 
 $(NAME1): $(OBJ1)
 	@$(CC) $(OBJ1) -o $(NAME1)
+
+$(NAME2): $(OBJ2)
+	@$(CC) $(OBJ2) -o $(NAME2)
 
 clean:
 	@$(RM) -f $(OBJ1)
