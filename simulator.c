@@ -70,7 +70,7 @@ static pcb_node_t *clean_exited_processes(
             strcpy(result[idx].process_name, it->data.process_name);
             result[idx].wait_time = (it->data.start_time - it->data.entry_time);
             result[idx].turnaround_time = (clock - it->data.entry_time);
-            result[idx].deadline_met = (result[idx].turnaround_time < it->data.deadline);
+            result[idx].deadline_met = (result[idx].turnaround_time <= it->data.deadline);
             //
             (*result_size) += 1;
             next = it->next;

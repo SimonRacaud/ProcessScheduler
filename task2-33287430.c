@@ -1,9 +1,9 @@
 /**
- * @file task1-33287430.c
+ * @file task2-33287430.c
  * @author simon.racaud 33287430 srac0005@student.monash.edu
- * createdAt: 11:28:02 AM Thu Sep 29 2022
- * updatedAt: 11:28:02 AM Thu Sep 29 2022
- * main function of task 2
+ * createdAt: 5:29:02 PM Thu Sep 29 2022
+ * updatedAt: 5:29:02 PM Thu Sep 29 2022
+ * Round-robin scheduler
  */
 
 #include <stdlib.h>
