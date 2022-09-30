@@ -74,24 +74,38 @@ pcb_node_t *node_remove(pcb_node_t *list, pcb_node_t *to_remove)
  * @brief Move first node of the list at the back
  * 
  * @param list 
+ * @param node: node to move at the end of list
  * @return pcb_node_t* 
  */
-pcb_node_t *node_move_back(pcb_node_t *list)
+pcb_node_t *node_move_back(pcb_node_t *list, pcb_node_t *node)
 {
-    pcb_node_t *to_move = list;
-    pcb_node_t *new_head = list->next;
+    pcb_node_t *prev = NULL;
+    pcb_node_t *node_prev = NULL;
+    pcb_node_t *new_head = (node) ? node->next : NULL;
 
-    if (!list)
+    if (!list || !node)
         return NULL;
-    for (pcb_node_t *it = list->next; it; it = it->next) {
-        if (it->next == NULL) {
-            it->next = to_move;
-            to_move->next = NULL;
+    if (node->next == NULL)
+        return list; // The node is already at the end of the list.
+    for (pcb_node_t *it = list; it; it = it->next) {
+        if (it == node) {
+            node_prev = prev; // Save node parent.
+        } else if (it->next == NULL) {
+            it->next = node;
+            if (node_prev) {
+                // The node to move have a previous node:
+                node_prev->next = node->next;
+            }
+            node->next = NULL;
         }
+        prev = it;
     }
-    return (new_head) ? new_head : list;
+    return (node_prev) 
+        ? node_prev  // The node to move had a parent.
+        : (new_head) 
+            ? new_head // The node to move had a children.
+            : node; // The list size is 1
 }
-
 
 /**
  * @brief Free list memory

@@ -75,7 +75,7 @@ int output_generator(const process_result_t *array, size_t size, int task);
 // List:
 pcb_node_t *node_push(pcb_node_t *list, const process_input_t *data, size_t time);
 pcb_node_t *node_remove(pcb_node_t *list, pcb_node_t *to_remove);
-pcb_node_t *node_move_back(pcb_node_t *list);
+pcb_node_t *node_move_back(pcb_node_t *list, pcb_node_t *node);
 void list_destroy(pcb_node_t *list);
 
 #endif

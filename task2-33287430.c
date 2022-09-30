@@ -29,15 +29,18 @@ static pcb_node_t *rr_scheduler(
     static size_t counter = QUANTUM;
 
     if (counter == 0 || !prev_node) {
+        // Time to switch to another process /or/ previous process no longer exists.
         counter = QUANTUM; // Reset counter
-        if (counter == 0) {
-            // Push the current process to end of the queue:
-            *list_ptr = node_move_back(*list_ptr);
+        if (prev_node) {
+            // Push the previous process to end of the queue:
+            *list_ptr = node_move_back(*list_ptr, prev_node);
         }
+        return *list_ptr; // Return the first process of the queue
     } else {
+        // Continue running previous process
         counter--;
+        return prev_node;
     }
-    return *list_ptr; // The head of the queue
 }
 
 int main(int argc, char **argv)
