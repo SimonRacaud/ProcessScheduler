@@ -18,7 +18,7 @@
  * @param clock : clock counter
  * @return int : remaining time in second
  */
-static int get_remaining_time(pcb_node_t *node, size_t clock)
+static inline int get_remaining_time(pcb_node_t *node, size_t clock)
 {
     return node->data.deadline - ((int)clock - node->data.entry_time);
 }

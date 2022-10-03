@@ -20,11 +20,12 @@
 char const *get_intput_filepath(int argc, char **argv)
 {
     if (argc > 2) {
+        // Too many arguments
         fprintf(stderr, "%s <optional-file-path>\n", argv[0]);
         return NULL;
     }
     if (argc == 2) {
-        return argv[1];
+        return argv[1]; // File path provided
     }
-    return DEF_INPUT_FILE;
+    return DEF_INPUT_FILE; // Use the default path
 }

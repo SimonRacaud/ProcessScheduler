@@ -23,7 +23,7 @@ static process_input_t *simulator_init(int argc, char **argv, size_t *input_size
     char const *filepath = get_intput_filepath(argc, argv);
 
     *input_size = 0;
-    return read_input(filepath, input_size);
+    return read_input(filepath, input_size); // Read and parse input file
 }
 
 /**
@@ -52,7 +52,7 @@ static int simulator_exit(
 }
 
 /**
- * @brief Main function of the application, execute a simulation
+ * @brief Execute a simulation
  * 
  * @param argc : argument counter
  * @param argv : argument values

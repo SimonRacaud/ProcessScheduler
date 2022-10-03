@@ -46,8 +46,8 @@ static int parse_line(char *line, process_input_t *out)
 }
 
 /**
- * @brief Read the input file and return a list of structure related to the
- *      entries of the file.
+ * @brief Read the input file and return a list of structure related to 
+ *  its content.
  * 
  * @param filepath[in] : path of the input file
  * @param size[out] : size of the array returned
@@ -64,11 +64,13 @@ process_input_t *read_input(char const *filepath, size_t *size)
     FILE *file;
 
     *size = memory_alloc_unit;
+    // Open file
     file = fopen(filepath, "r");
     if (!file) {
         perror(NULL);
         return NULL;
     }
+    // Read content line per line
     while (getline(&line, &line_size, file) > 0) {
         // Increase the size of the structure array:
         if (idx == *size - 1) { 
@@ -87,6 +89,7 @@ process_input_t *read_input(char const *filepath, size_t *size)
         line = NULL;
         line_size = 0;
     }
+    // Cleanup
     free(line);
     fclose(file);
     *size = idx;
@@ -110,11 +113,13 @@ int output_generator(const process_result_t *array, size_t size, int task)
         return EXIT_FAILURE;
     }
     filename[8] = task + '0';
+    // Open file
     file = fopen(filename, "w");
     if (!file) {
         perror(NULL);
         return EXIT_FAILURE;
     }
+    // Write logs, line per line
     for (size_t i = 0; i < size; i++) {
         fprintf(file, "%s %d %d %d\n",
             array[i].process_name, 
@@ -122,6 +127,7 @@ int output_generator(const process_result_t *array, size_t size, int task)
             array[i].turnaround_time, 
             (int)array[i].deadline_met);
     }
+    // Cleanup
     fclose(file);
     return EXIT_SUCCESS;
 }

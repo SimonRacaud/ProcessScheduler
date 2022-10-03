@@ -29,10 +29,11 @@ static pcb_node_t *rr_scheduler(
     static size_t counter = QUANTUM;
 
     if (counter == 0 || !prev_node) {
-        // Time to switch to another process /or/ previous process no longer exists.
+        // Time to switch to another process 
+        //  or previous process no longer exists (exited).
         counter = QUANTUM - 1; // Reset counter
         if (prev_node) {
-            // Push the previous process to end of the queue:
+            // Push the previous process to the end of the queue:
             *list_ptr = node_move_back(*list_ptr, prev_node);
         }
         return *list_ptr; // Return the first process of the queue

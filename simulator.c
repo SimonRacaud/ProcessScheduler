@@ -38,6 +38,7 @@ static void logger(event_t evt, const char *proc_name, size_t clock)
     }
 }
 
+// Create PCB when needed.
 static pcb_node_t *manage_process_entry(
     pcb_node_t *processes, 
     const process_input_t *inputs, 
@@ -46,14 +47,16 @@ static pcb_node_t *manage_process_entry(
 {
     for (size_t i = 0; i < inputs_size; i++) {
         if (clock == (size_t)inputs[i].arrival_time) {
+            // Process arrival time is now.
             logger(E_CREATE, inputs[i].process_name, clock);
-            // Push node to the front of the list
+            // Push PCB node at the beginning of the list:
             processes = node_push(processes, &inputs[i], clock);
         }
     }
     return processes;
 }
 
+// Remove PCB when needed. Save process simulation context.
 static pcb_node_t *clean_exited_processes(
     pcb_node_t *processes, 
     pcb_node_t **running_node, 
@@ -65,17 +68,20 @@ static pcb_node_t *clean_exited_processes(
    for (pcb_node_t *it = processes; it; it = next) {
         if (it->data.state == EXIT) {
             logger(E_EXIT, it->data.process_name, clock);
-            // Save informations about process execution in result structure
+            // Save informations about process execution in result struct
             size_t idx = *result_size;
             strcpy(result[idx].process_name, it->data.process_name);
             result[idx].wait_time = (it->data.start_time - it->data.entry_time);
             result[idx].turnaround_time = (clock - it->data.entry_time);
-            result[idx].deadline_met = (result[idx].turnaround_time <= it->data.deadline);
+            result[idx].deadline_met = 
+                (result[idx].turnaround_time <= it->data.deadline);
             //
             (*result_size) += 1;
             next = it->next;
+            // Remove node:
             if (*running_node == it) {
-                *running_node = NULL;
+                // The current running node no longer exist.
+                *running_node = NULL; 
             }
             processes = node_remove(processes, it);
         } else {
@@ -107,11 +113,14 @@ process_result_t *simulate(
 
     *size_out = 0;
     while (processes || clock == 0) {
+        // Remove exited processes' PCB:
         processes = clean_exited_processes(processes, &running_node, result, size_out, clock);
+        // Create new PCB:
         processes = manage_process_entry(processes, inputs, size_in, clock);
+        // Select running process:
         pcb_node_t *select_node = scheduler(&processes, running_node, clock);
 
-        // If a NEW process is elected to run:
+        // If a NEW process is elected to run: (not the same than before)
         if (select_node && running_node != select_node) {
             select_node->data.state = RUNNING; // Start new process
             if (running_node)
@@ -131,6 +140,6 @@ process_result_t *simulate(
         clock++;
     }
     // cleanup
-    list_destroy(processes);
+    list_destroy(processes); // The PCB list should be empty. However, just in case..
     return result;
 }
