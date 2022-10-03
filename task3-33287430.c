@@ -16,11 +16,11 @@
  * 
  * @param node : PCB node
  * @param clock : clock counter
- * @return size_t : remaining time in second
+ * @return int : remaining time in second
  */
-static size_t get_remaining_time(pcb_node_t *node, size_t clock)
+static int get_remaining_time(pcb_node_t *node, size_t clock)
 {
-    return node->data.deadline - (clock - node->data.entry_time);
+    return node->data.deadline - ((int)clock - node->data.entry_time);
 }
 
 /**
@@ -37,15 +37,17 @@ static pcb_node_t *deadline_based_scheduler(
     size_t clock)
 {
     pcb_node_t *selected = *list_ptr;
-    size_t remaining_select;
+    int remaining_select;
 
     if (!selected)
         return NULL; // Empty PCB list
+    if (!selected->next)
+        return selected; // Only one node in the list
     // remaining time before the deadline of the first process:
     remaining_select = get_remaining_time(selected, clock);
-    for (pcb_node_t *it = *list_ptr; it; it = it->next) {
+    for (pcb_node_t *it = (*list_ptr)->next; it; it = it->next) {
         // remaining time before the deadline of the current process:
-        size_t remaining = get_remaining_time(it, clock);
+        int remaining = get_remaining_time(it, clock);
 
         if (remaining < remaining_select) {
             // the current process has a lower remaining time

@@ -97,6 +97,7 @@ pcb_node_t *node_move_back(pcb_node_t *list, pcb_node_t *node)
                 node_prev->next = node->next;
             }
             node->next = NULL;
+            break;
         }
         prev = it;
     }
