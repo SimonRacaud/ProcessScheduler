@@ -1,7 +1,7 @@
-Author: simon.racaud
-Description: Documentation of the second assignment.
+__Author__: simon.racaud
 
-_____________________________
+__Description__: Documentation of the program.
+
 # BUILD
 
 To compile the three schedulers:
@@ -21,7 +21,7 @@ $> make clean       # To remove the objects
 $> make fclean      # To remove the objects and binaries
 $> make re          # alias for 'make clean all'
 ```
-_____________________________
+
 # RUN
 
 To run a task, execute the corresponding binary file (fcfs_scheduler, rr_scheduler or edf_scheduler):
@@ -31,7 +31,6 @@ $> ./<algo>_scheduler <filepath>
 The <filepath> parameter is optional. If not given, ./processes.txt will be used.
 <filepath> is pointing on the file containing the instructions to run the simulator.
 
-_____________________________
 # Examples:
 
 ## First-Come First-Served:
@@ -67,7 +66,6 @@ Z 9 12 0
 ```
 The processes enter in order: W, X, Y, Z and are executed in the same order.
 
-__________
 ## Round-robin:
 
 Content of processes.txt
@@ -111,7 +109,6 @@ Z 9 12 0
 - Z enters at 8, the scheduler is looking for a new process at the same time, so Z is selected.
 - (...)
 
-__________
 ## Earliest Deadline First:
 
 Content of processes.txt
