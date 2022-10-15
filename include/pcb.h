@@ -1,6 +1,6 @@
 /**
  * @file pcb.h
- * @author simon.racaud 33287430 srac0005@student.monash.edu
+ * @author simon.racaud
  * createdAt: 11:34:24 AM Thu Sep 29 2022
  * updatedAt: 11:34:24 AM Thu Sep 29 2022
  * Process control block

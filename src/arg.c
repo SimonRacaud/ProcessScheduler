@@ -1,6 +1,6 @@
 /**
  * @file arg.c
- * @author simon.racaud 33287430 srac0005@student.monash.edu
+ * @author simon.racaud
  * createdAt: 12:14:16 PM Thu Sep 29 2022
  * updatedAt: 12:14:16 PM Thu Sep 29 2022
  * Parse the program argument
@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 
-#include "assignment2.h"
+#include "simulator.h"
 
 /**
  * @brief Return the filepath of the input process file

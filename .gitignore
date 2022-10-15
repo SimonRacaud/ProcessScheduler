@@ -1,5 +1,4 @@
 *.o
-task[1-5]
-processes.txt
+*_scheduler
 .vscode
 results-[1-3].txt

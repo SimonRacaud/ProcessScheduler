@@ -1,29 +1,29 @@
 ##
 ## @file Makefile
-## @author simon.racaud 33287430 srac0005@student.monash.edu
+## @author simon.racaud
 ## createdAt: 11:26:47 AM Thu Sep 29 2022
 ## updatedAt: 11:26:47 AM Thu Sep 29 2022
 ##
 
-SRC = 	file.c				\
-		arg.c				\
-		simulator.c 		\
-		list.c				\
-		common.c			\
+SRC = 	src/file.c				\
+		src/arg.c				\
+		src/simulator.c 		\
+		src/list.c				\
+		src/common.c			\
 
-SRC1 = 	$(SRC) task1-33287430.c
-SRC2 = 	$(SRC) task2-33287430.c
-SRC3 = 	$(SRC) task3-33287430.c
+SRC1 = 	$(SRC) src/main_fcfs.c
+SRC2 = 	$(SRC) src/main_rr.c
+SRC3 = 	$(SRC) src/main_edf.c
 
 OBJ1 = $(SRC1:.c=.o)
 OBJ2 = $(SRC2:.c=.o)
 OBJ3 = $(SRC3:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -W -I./
+CFLAGS = -Wall -Wextra -Werror -W -I./include
 
-NAME1 = task1
-NAME2 = task2
-NAME3 = task3
+NAME1 = fcfs_scheduler
+NAME2 = rr_scheduler
+NAME3 = edf_scheduler
 
 all: $(NAME1) $(NAME2) $(NAME3)
 

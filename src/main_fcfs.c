@@ -1,6 +1,6 @@
 /**
- * @file task1-33287430.c
- * @author simon.racaud 33287430 srac0005@student.monash.edu
+ * @file main_fcfs.c
+ * @author simon.racaud
  * createdAt: 11:28:02 AM Thu Sep 29 2022
  * updatedAt: 11:28:02 AM Thu Sep 29 2022
  * main function of task 1
@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "assignment2.h"
+#include "simulator.h"
 
 /**
  * @brief First-Come-First-Served scheduler

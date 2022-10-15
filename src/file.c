@@ -1,6 +1,6 @@
 /**
  * @file input.c
- * @author simon.racaud 33287430 srac0005@student.monash.edu
+ * @author simon.racaud
  * createdAt: 11:49:19 AM Thu Sep 29 2022
  * updatedAt: 11:49:19 AM Thu Sep 29 2022
  * Management of the file operations
@@ -10,7 +10,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "assignment2.h"
+#include "simulator.h"
 
 static const size_t memory_alloc_unit = 10;
 

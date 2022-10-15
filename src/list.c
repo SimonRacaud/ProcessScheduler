@@ -1,12 +1,12 @@
 /**
  * @file list.c
- * @author simon.racaud 33287430 srac0005@student.monash.edu
+ * @author simon.racaud
  * createdAt: 2:24:27 PM Thu Sep 29 2022
  * updatedAt: 2:24:27 PM Thu Sep 29 2022
  * Linked list of pcb
  */
 
-#include "assignment2.h"
+#include "simulator.h"
 
 #include <string.h>
 #include <stdlib.h>

@@ -1,18 +1,18 @@
-Author: simon.racaud 33287430 srac0005@student.monash.edu
+Author: simon.racaud
 Description: Documentation of the second assignment.
 
 _____________________________
 # BUILD
 
-To compile the three tasks:
+To compile the three schedulers:
 ```bash
 $> make
 ```
 
 To compile a specific task: 
 ```bash
-$> make <taskX>
-$> make task1 task2 task3
+$> make <binary-name>
+$> make fcfs_scheduler rr_scheduler edf_scheduler
 ```
 
 Other commands:
@@ -24,9 +24,9 @@ $> make re          # alias for 'make clean all'
 _____________________________
 # RUN
 
-To run a task, execute the corresponding binary file (task1, task2 or task3):
+To run a task, execute the corresponding binary file (fcfs_scheduler, rr_scheduler or edf_scheduler):
 ```bash
-$> ./task[1-3] <filepath>
+$> ./<algo>_scheduler <filepath>
 ```
 The <filepath> parameter is optional. If not given, ./processes.txt will be used.
 <filepath> is pointing on the file containing the instructions to run the simulator.
@@ -34,7 +34,7 @@ The <filepath> parameter is optional. If not given, ./processes.txt will be used
 _____________________________
 # Examples:
 
-## Task 1:
+## First-Come First-Served:
 
 Content of processes.txt
 ```
@@ -44,7 +44,7 @@ Y 3 8 6
 Z 8 3 2
 ```
 ```bash
-$> ./task1 processes.txt && cat results-1.txt
+$> ./fcfs_scheduler processes.txt && cat results-1.txt
 ```
 The result will be:
 ```
@@ -68,7 +68,7 @@ Z 9 12 0
 The processes enter in order: W, X, Y, Z and are executed in the same order.
 
 __________
-## Task 2:
+## Round-robin:
 
 Content of processes.txt
 ```
@@ -78,7 +78,7 @@ Y 3 8 6
 Z 8 3 2
 ```
 ```bash
-$> ./task2 processes.txt && cat results-2.txt
+$> ./rr_scheduler processes.txt && cat results-2.txt
 ```
 The result will be:
 ```
@@ -112,7 +112,7 @@ Z 9 12 0
 - (...)
 
 __________
-## Task 3:
+## Earliest Deadline First:
 
 Content of processes.txt
 ```
@@ -122,7 +122,7 @@ Y 3 8 6
 Z 8 3 2
 ```
 ```bash
-$> ./task3 processes.txt && cat results-3.txt
+$> ./edf_scheduler processes.txt && cat results-3.txt
 ```
 The result will be:
 ```
@@ -208,8 +208,3 @@ The process with the shortest time before the deadline will run first.
 The shortest time before the deadline is the deadline minus the age of the PCB (now - entry time).
 
 If two processes have the same remaining time before the deadline, the last process to enter the queue will be selected.
-
--------------
-
-Thank you for assessing my project.
-Simon RACAUD

@@ -1,12 +1,12 @@
 /**
  * @file simulator.c
- * @author simon.racaud 33287430 srac0005@student.monash.edu
+ * @author simon.racaud
  * createdAt: 12:42:41 PM Thu Sep 29 2022
  * updatedAt: 12:42:41 PM Thu Sep 29 2022
  * Scheduler simulator
  */
 
-#include "assignment2.h"
+#include "simulator.h"
 
 #include <stdlib.h>
 #include <stddef.h>

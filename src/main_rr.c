@@ -1,6 +1,6 @@
 /**
- * @file task2-33287430.c
- * @author simon.racaud 33287430 srac0005@student.monash.edu
+ * @file main_rr.c
+ * @author simon.racaud
  * createdAt: 5:29:02 PM Thu Sep 29 2022
  * updatedAt: 5:29:02 PM Thu Sep 29 2022
  * Round-robin scheduler
@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "assignment2.h"
+#include "simulator.h"
 
 static const size_t QUANTUM = 2;
 

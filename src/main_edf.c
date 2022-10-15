@@ -1,6 +1,6 @@
 /**
- * @file task3-33287430.c
- * @author simon.racaud 33287430 srac0005@student.monash.edu
+ * @file main_edf.c
+ * @author simon.racaud
  * createdAt: 5:29:24 PM Thu Sep 29 2022
  * updatedAt: 5:29:24 PM Thu Sep 29 2022
  * Deadline based scheduler
@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "assignment2.h"
+#include "simulator.h"
 
 /**
  * @brief Compute the remaining time the process have before its deadline

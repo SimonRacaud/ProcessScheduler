@@ -1,6 +1,6 @@
 /**
- * @file assignment2.h
- * @author simon.racaud 33287430 srac0005@student.monash.edu
+ * @file simulator.h
+ * @author simon.racaud
  * createdAt: 11:31:34 AM Thu Sep 29 2022
  * updatedAt: 11:31:34 AM Thu Sep 29 2022
  * Main header of the programs
